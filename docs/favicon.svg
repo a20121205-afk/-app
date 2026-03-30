@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="個管家訪紀錄工具圖示">
+  <rect width="128" height="128" rx="28" fill="#b85c38"/>
+  <path d="M33 29h42l20 20v50a8 8 0 0 1-8 8H41a8 8 0 0 1-8-8V37a8 8 0 0 1 8-8z" fill="#fff7eb"/>
+  <path d="M75 29v18a4 4 0 0 0 4 4h16" fill="#f3d9c0"/>
+  <path d="M47 62h34M47 77h34M47 92h22" stroke="#b85c38" stroke-linecap="round" stroke-width="8"/>
+</svg>
