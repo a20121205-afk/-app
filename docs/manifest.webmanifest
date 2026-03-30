@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "lang": "zh-Hant",
+  "name": "個管家訪紀錄輔助工具",
+  "short_name": "家訪紀錄",
+  "description": "支援家訪紀錄整理、拍照、草稿儲存與功能評估輸出的長照個案管理工具。",
+  "scope": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "browser"],
+  "background_color": "#f4efe6",
+  "theme_color": "#b85c38",
+  "categories": ["medical", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
