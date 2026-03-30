@@ -1,0 +1,447 @@
+<!-- 宣告這是一份 HTML5 文件。 -->
+<!DOCTYPE html>
+<!-- 設定網頁語系為繁體中文。 -->
+<html lang="zh-Hant">
+<!-- 開始網頁的標頭區塊。 -->
+<head>
+  <!-- 指定文字編碼為 UTF-8，避免中文亂碼。 -->
+  <meta charset="UTF-8" />
+  <!-- 讓手機瀏覽器使用正確的縮放方式。 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 提供搜尋引擎與分享摘要的簡短說明。 -->
+  <meta
+    name="description"
+    content="長照個案管理家訪紀錄輔助工具，支援 ADL/IADL 評估、拍照整理、草稿儲存與家訪紀錄輸出。"
+  />
+  <!-- 設定瀏覽器主題色。 -->
+  <meta name="theme-color" content="#b85c38" />
+  <!-- 讓 iPad / iPhone 可加入主畫面時使用獨立 App 模式。 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 設定 iPad / iPhone 加入主畫面後的標題。 -->
+  <meta name="apple-mobile-web-app-title" content="家訪紀錄" />
+  <!-- 設定 iOS 狀態列樣式。 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <!-- 避免 iOS 自動把數字辨識成電話。 -->
+  <meta name="format-detection" content="telephone=no" />
+  <!-- 設定瀏覽器分頁標題。 -->
+  <title>個管家訪紀錄輔助工具</title>
+  <!-- 設定網站圖示。 -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <!-- 提供 iPad / iPhone 主畫面圖示。 -->
+  <link rel="apple-touch-icon" href="./favicon.svg" />
+  <!-- 提供安裝到主畫面的網站設定。 -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <!-- 載入外部樣式表，讓畫面更容易閱讀。 -->
+  <script type="module" crossorigin src="./assets/main-B1l1r1tw.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/styles-BOqEI7mK.css">
+</head>
+<!-- 開始網頁主體內容。 -->
+<body>
+  <!-- 外層容器用來控制整體版面寬度。 -->
+  <div class="page-shell">
+    <!-- 頁首區塊顯示工具名稱與用途。 -->
+    <header class="hero">
+      <!-- 顯示小標籤，讓使用者快速知道工具定位。 -->
+      <p class="hero__eyebrow">長照個案管理紀錄輔助工具</p>
+      <!-- 顯示主標題。 -->
+      <h1>家訪紀錄工具</h1>
+      <!-- 用白話文說明這一版的主要用途。 -->
+      <p class="hero__intro">
+        先把家訪表單、照片整理與紀錄輸出做好，讓你可以邊訪視邊記錄，回來後快速整理成可貼系統的內容。
+      </p>
+      <!-- 顯示常用入口按鈕。 -->
+      <div class="hero__actions">
+        <!-- 提供 iPad 安裝教學頁連結。 -->
+        <a class="button button-link button--ghost" href="./install.html">iPad 安裝教學</a>
+      </div>
+    </header>
+
+    <!-- 主要內容區塊放置表單與輸出結果。 -->
+    <main class="layout">
+      <!-- 左側欄位放使用者輸入表單。 -->
+      <section class="panel panel--form">
+        <!-- 區塊標題。 -->
+        <div class="panel__heading">
+          <!-- 顯示輸入區名稱。 -->
+          <h2>訪視資料輸入</h2>
+          <!-- 提醒使用者這一區要填什麼。 -->
+          <p>依序填寫基本資料、功能狀況、觀察紀錄與照片。</p>
+        </div>
+
+        <!-- 家訪表單，送出時由 JavaScript 進行整理。 -->
+        <form id="visit-form" class="visit-form">
+          <!-- 基本資料區塊。 -->
+          <section class="form-section">
+            <!-- 區塊標題。 -->
+            <h3>基本資料</h3>
+            <!-- 欄位群組用來排列輸入框。 -->
+            <div class="field-grid">
+              <!-- 個案姓名輸入欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>個案姓名</span>
+                <!-- 讓使用者輸入姓名。 -->
+                <input id="client-name" name="clientName" type="text" placeholder="例如：王○○" />
+              </label>
+              <!-- 訪視日期輸入欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>訪視日期</span>
+                <!-- 使用日期欄位方便快速選擇。 -->
+                <input id="visit-date" name="visitDate" type="date" />
+              </label>
+              <!-- 訪視方式輸入欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>訪視方式</span>
+                <!-- 提供家訪或電訪等選項。 -->
+                <select id="visit-type" name="visitType">
+                  <!-- 預設選項。 -->
+                  <option value="家訪">家訪</option>
+                  <!-- 備用選項，方便未來擴充。 -->
+                  <option value="電訪">電訪</option>
+                </select>
+              </label>
+              <!-- 主要照顧者欄位。 -->
+              <div class="field field--full">
+                <!-- 顯示欄位名稱。 -->
+                <span>主要照顧者</span>
+                <!-- 勾選主要照顧者類型。 -->
+                <div class="choice-grid">
+                  <!-- 配偶選項。 -->
+                  <label class="choice-item">
+                    <!-- 單選按鈕。 -->
+                    <input type="radio" name="primaryCaregiverOption" value="配偶" />
+                    <!-- 顯示選項文字。 -->
+                    <span>配偶</span>
+                  </label>
+                  <!-- 兒子選項。 -->
+                  <label class="choice-item">
+                    <!-- 單選按鈕。 -->
+                    <input type="radio" name="primaryCaregiverOption" value="兒子" />
+                    <!-- 顯示選項文字。 -->
+                    <span>兒子</span>
+                  </label>
+                  <!-- 女兒選項。 -->
+                  <label class="choice-item">
+                    <!-- 單選按鈕。 -->
+                    <input type="radio" name="primaryCaregiverOption" value="女兒" />
+                    <!-- 顯示選項文字。 -->
+                    <span>女兒</span>
+                  </label>
+                  <!-- 媳婦選項。 -->
+                  <label class="choice-item">
+                    <!-- 單選按鈕。 -->
+                    <input type="radio" name="primaryCaregiverOption" value="媳婦" />
+                    <!-- 顯示選項文字。 -->
+                    <span>媳婦</span>
+                  </label>
+                  <!-- 外籍看護選項。 -->
+                  <label class="choice-item">
+                    <!-- 單選按鈕。 -->
+                    <input type="radio" name="primaryCaregiverOption" value="外籍看護" />
+                    <!-- 顯示選項文字。 -->
+                    <span>外籍看護</span>
+                  </label>
+                  <!-- 其他選項。 -->
+                  <label class="choice-item">
+                    <!-- 單選按鈕。 -->
+                    <input id="primary-caregiver-other-option" type="radio" name="primaryCaregiverOption" value="其他" />
+                    <!-- 顯示選項文字。 -->
+                    <span>其他</span>
+                  </label>
+                </div>
+                <!-- 主要照顧者其他輸入欄位。 -->
+                <input
+                  id="primary-caregiver-other-text"
+                  name="primaryCaregiverOtherText"
+                  type="text"
+                  placeholder="若主要照顧者選其他，請輸入稱謂或姓名"
+                  disabled
+                />
+                <!-- 次要照顧者開關。 -->
+                <label class="toggle-item">
+                  <!-- 顯示是否有次要照顧者。 -->
+                  <input id="has-secondary-caregiver" type="checkbox" />
+                  <!-- 顯示說明文字。 -->
+                  <span>有次要照顧者</span>
+                </label>
+                <!-- 次要照顧者區塊，勾選後再展開。 -->
+                <div id="secondary-caregiver-section" class="secondary-caregiver is-hidden">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>次要照顧者</span>
+                  <!-- 勾選次要照顧者類型。 -->
+                  <div class="choice-grid">
+                    <!-- 配偶選項。 -->
+                    <label class="choice-item">
+                      <!-- 單選按鈕。 -->
+                      <input type="radio" name="secondaryCaregiverOption" value="配偶" />
+                      <!-- 顯示選項文字。 -->
+                      <span>配偶</span>
+                    </label>
+                    <!-- 兒子選項。 -->
+                    <label class="choice-item">
+                      <!-- 單選按鈕。 -->
+                      <input type="radio" name="secondaryCaregiverOption" value="兒子" />
+                      <!-- 顯示選項文字。 -->
+                      <span>兒子</span>
+                    </label>
+                    <!-- 女兒選項。 -->
+                    <label class="choice-item">
+                      <!-- 單選按鈕。 -->
+                      <input type="radio" name="secondaryCaregiverOption" value="女兒" />
+                      <!-- 顯示選項文字。 -->
+                      <span>女兒</span>
+                    </label>
+                    <!-- 媳婦選項。 -->
+                    <label class="choice-item">
+                      <!-- 單選按鈕。 -->
+                      <input type="radio" name="secondaryCaregiverOption" value="媳婦" />
+                      <!-- 顯示選項文字。 -->
+                      <span>媳婦</span>
+                    </label>
+                    <!-- 外籍看護選項。 -->
+                    <label class="choice-item">
+                      <!-- 單選按鈕。 -->
+                      <input type="radio" name="secondaryCaregiverOption" value="外籍看護" />
+                      <!-- 顯示選項文字。 -->
+                      <span>外籍看護</span>
+                    </label>
+                    <!-- 其他選項。 -->
+                    <label class="choice-item">
+                      <!-- 單選按鈕。 -->
+                      <input id="secondary-caregiver-other-option" type="radio" name="secondaryCaregiverOption" value="其他" />
+                      <!-- 顯示選項文字。 -->
+                      <span>其他</span>
+                    </label>
+                  </div>
+                  <!-- 次要照顧者其他輸入欄位。 -->
+                  <input
+                    id="secondary-caregiver-other-text"
+                    name="secondaryCaregiverOtherText"
+                    type="text"
+                    placeholder="若次要照顧者選其他，請輸入稱謂或姓名"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ADL 區塊由 JavaScript 自動產生。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>ADL 基本日常生活功能</h3>
+            <!-- 提示使用者如何選擇等級。 -->
+            <p class="section-note">每一項都可選擇：可獨立完成、需部分協助、完全依賴。</p>
+            <!-- 放置 ADL 選項的容器。 -->
+            <div id="adl-fields" class="rating-grid"></div>
+          </section>
+
+          <!-- IADL 區塊由 JavaScript 自動產生。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>IADL 工具性日常生活功能</h3>
+            <!-- 提示使用者如何選擇等級。 -->
+            <p class="section-note">可依訪視狀況快速勾選目前功能程度。</p>
+            <!-- 放置 IADL 選項的容器。 -->
+            <div id="iadl-fields" class="rating-grid"></div>
+          </section>
+
+          <!-- 家訪觀察區塊。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>家訪觀察與補充</h3>
+            <!-- 欄位群組用來排列文字輸入框。 -->
+            <div class="field-grid field-grid--single">
+              <!-- 家訪觀察欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>家訪觀察</span>
+                <!-- 讓使用者輸入現場觀察內容。 -->
+                <textarea id="observation" name="observation" rows="4" placeholder="例如：案家環境整潔，個案可簡短對答，移位需扶持。"></textarea>
+              </label>
+              <!-- 個案或家屬主述欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>個案／家屬主述</span>
+                <!-- 讓使用者記錄主要回饋。 -->
+                <textarea id="statement" name="statement" rows="4" placeholder="例如：女兒表示近期夜間如廁次數增加，照顧壓力較高。"></textarea>
+              </label>
+              <!-- 其他補充欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>其他補充</span>
+                <!-- 讓使用者補充未涵蓋資訊。 -->
+                <textarea id="extra-note" name="extraNote" rows="3" placeholder="例如：本次同步查看輔具使用情形。"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <!-- 問題勾選區塊。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>問題勾選</h3>
+            <!-- 提醒這一區是可選填。 -->
+            <p class="section-note">這一區可不勾，系統也會依輸入內容自動推論一些問題。</p>
+            <!-- 放置問題核取方塊的容器。 -->
+            <div id="issue-fields" class="check-grid"></div>
+          </section>
+
+          <!-- 照片區塊。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>拍照與照片整理</h3>
+            <!-- 用白話文說明可拍照或上傳。 -->
+            <p class="section-note">手機可直接拍照，電腦可上傳照片；照片只留在這台裝置的瀏覽器中。</p>
+            <!-- 拍照控制區。 -->
+            <div class="photo-actions">
+              <!-- 開啟裝置相機。 -->
+              <button id="start-camera" class="button button--ghost" type="button">開啟相機</button>
+              <!-- 拍攝目前畫面。 -->
+              <button id="capture-photo" class="button button--ghost" type="button">拍攝畫面</button>
+              <!-- 關閉相機串流。 -->
+              <button id="stop-camera" class="button button--ghost" type="button">關閉相機</button>
+              <!-- 使用 label 包住 input 讓按鈕比較好看。 -->
+              <label class="button button--primary" for="photo-input">新增照片</label>
+              <!-- 檔案輸入支援多張圖片與手機相機。 -->
+              <input id="photo-input" type="file" accept="image/*" capture="environment" multiple />
+              <!-- 顯示已選照片數量。 -->
+              <span id="photo-count" class="photo-count">目前 0 張</span>
+            </div>
+            <!-- 相機預覽區塊。 -->
+            <div class="camera-box">
+              <!-- 顯示相機畫面預覽。 -->
+              <video id="camera-preview" autoplay playsinline muted></video>
+              <!-- 顯示相機狀態文字。 -->
+              <p id="camera-status" class="camera-status">目前尚未開啟相機，可直接拍照或改用上傳照片。</p>
+              <!-- 畫布用來把相機畫面轉成圖片。 -->
+              <canvas id="capture-canvas"></canvas>
+            </div>
+            <!-- 照片預覽容器。 -->
+            <div id="photo-preview" class="photo-grid"></div>
+          </section>
+
+          <!-- 草稿儲存區塊。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>草稿儲存</h3>
+            <!-- 說明目前草稿儲存位置。 -->
+            <p class="section-note">家訪完可先存到目前這台裝置的瀏覽器資料庫，之後再回來載入整理。</p>
+            <!-- 草稿操作區。 -->
+            <div class="draft-box">
+              <!-- 草稿操作按鈕列。 -->
+              <div class="draft-actions">
+                <!-- 儲存新草稿。 -->
+                <button id="save-draft" type="button" class="button button--primary">儲存草稿</button>
+                <!-- 載入選取草稿。 -->
+                <button id="load-draft" type="button" class="button button--ghost">載入草稿</button>
+                <!-- 刪除選取草稿。 -->
+                <button id="delete-draft" type="button" class="button button--ghost">刪除草稿</button>
+              </div>
+              <!-- 草稿選擇清單。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>已存草稿</span>
+                <!-- 顯示目前已儲存的草稿。 -->
+                <select id="draft-select">
+                  <!-- 預設提示。 -->
+                  <option value="">目前尚無草稿</option>
+                </select>
+              </label>
+              <!-- 顯示草稿狀態文字。 -->
+              <p id="draft-status" class="draft-status">草稿會存放在目前這台裝置的瀏覽器中，不會自動上傳。</p>
+            </div>
+          </section>
+
+          <!-- 操作按鈕列。 -->
+          <div class="form-actions">
+            <!-- 送出表單並產生整理結果。 -->
+            <button type="submit" class="button button--primary">產生整理內容</button>
+            <!-- 重設表單讓使用者快速重新開始。 -->
+            <button type="reset" class="button button--ghost">清空表單</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- 右側欄位放系統整理後的結果。 -->
+      <section class="panel panel--output">
+        <!-- 區塊標題。 -->
+        <div class="panel__heading">
+          <!-- 顯示輸出區名稱。 -->
+          <h2>整理結果</h2>
+          <!-- 說明輸出用途。 -->
+          <p>按下產生後，家訪紀錄會改用接近你提供範例的敘事格式，另外保留功能描述、問題清單與建議方向。</p>
+        </div>
+
+        <!-- 輸出卡片群組。 -->
+        <div class="output-stack">
+          <!-- 家訪紀錄輸出卡片。 -->
+          <article class="output-card">
+            <!-- 卡片標題列。 -->
+            <div class="output-card__header">
+              <!-- 顯示欄位名稱。 -->
+              <h3>家訪紀錄</h3>
+              <!-- 複製按鈕。 -->
+              <button class="button button--small" data-copy-target="visit-record-output" type="button">複製</button>
+            </div>
+            <!-- 顯示產出的文字結果。 -->
+            <textarea id="visit-record-output" rows="9" readonly placeholder="這裡會顯示接近家訪範例風格的完整敘事紀錄。"></textarea>
+          </article>
+
+          <!-- 功能描述輸出卡片。 -->
+          <article class="output-card">
+            <!-- 卡片標題列。 -->
+            <div class="output-card__header">
+              <!-- 顯示欄位名稱。 -->
+              <h3>功能狀況描述</h3>
+              <!-- 複製按鈕。 -->
+              <button class="button button--small" data-copy-target="function-output" type="button">複製</button>
+            </div>
+            <!-- 顯示產出的文字結果。 -->
+            <textarea id="function-output" rows="7" readonly placeholder="這裡會顯示 ADL/IADL 整合後的功能描述。"></textarea>
+          </article>
+
+          <!-- 問題清單輸出卡片。 -->
+          <article class="output-card">
+            <!-- 卡片標題列。 -->
+            <div class="output-card__header">
+              <!-- 顯示欄位名稱。 -->
+              <h3>問題清單</h3>
+              <!-- 複製按鈕。 -->
+              <button class="button button--small" data-copy-target="problem-output" type="button">複製</button>
+            </div>
+            <!-- 顯示產出的文字結果。 -->
+            <textarea id="problem-output" rows="6" readonly placeholder="這裡會顯示依觀察與功能推論的問題清單。"></textarea>
+          </article>
+
+          <!-- 建議方向輸出卡片。 -->
+          <article class="output-card">
+            <!-- 卡片標題列。 -->
+            <div class="output-card__header">
+              <!-- 顯示欄位名稱。 -->
+              <h3>建議方向</h3>
+              <!-- 複製按鈕。 -->
+              <button class="button button--small" data-copy-target="suggestion-output" type="button">複製</button>
+            </div>
+            <!-- 顯示產出的文字結果。 -->
+            <textarea id="suggestion-output" rows="6" readonly placeholder="這裡會顯示較保守語氣的建議方向。"></textarea>
+          </article>
+
+          <!-- 固定提醒區塊。 -->
+          <article class="output-card output-card--note">
+            <!-- 顯示固定備註標題。 -->
+            <h3>固定備註</h3>
+            <!-- 顯示每次都要附上的提醒。 -->
+            <p id="fixed-note">
+              本內容為AI依輸入資料自動整理之建議，僅供參考，實際服務規劃仍須由個案管理人員依專業判斷執行。
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 載入主要功能腳本。 -->
+</body>
+</html>
