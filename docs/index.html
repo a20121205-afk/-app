@@ -32,8 +32,8 @@
   <!-- 提供安裝到主畫面的網站設定。 -->
   <link rel="manifest" href="./manifest.webmanifest" />
   <!-- 載入外部樣式表，讓畫面更容易閱讀。 -->
-  <script type="module" crossorigin src="./assets/main-B1l1r1tw.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/styles-BOqEI7mK.css">
+  <script type="module" crossorigin src="./assets/main.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/styles.css">
 </head>
 <!-- 開始網頁主體內容。 -->
 <body>
@@ -322,12 +322,85 @@
             <div id="photo-preview" class="photo-grid"></div>
           </section>
 
+          <!-- 免費優先同步區塊。 -->
+          <section class="form-section">
+            <!-- 顯示區塊標題。 -->
+            <h3>同步設定</h3>
+            <!-- 說明這一版同步的範圍。 -->
+            <p class="section-note">
+              這一版會先同步文字草稿，方便 iPad 與桌機共用；照片仍保留在原本儲存的裝置，不會上傳雲端。
+            </p>
+            <!-- 同步設定外框。 -->
+            <div class="sync-box">
+              <!-- 顯示目前同步模式與狀態。 -->
+              <div class="sync-summary">
+                <!-- 顯示目前使用中的草稿模式。 -->
+                <p class="sync-mode-row">
+                  <!-- 顯示標題文字。 -->
+                  <span>目前模式</span>
+                  <!-- 顯示目前是本機或雲端草稿。 -->
+                  <strong id="sync-mode-badge" class="mode-badge">本機草稿</strong>
+                </p>
+                <!-- 顯示同步狀態說明。 -->
+                <p id="sync-status" class="sync-status">尚未設定雲端同步，目前草稿只會存放在這台裝置。</p>
+              </div>
+              <!-- Firebase 設定輸入區。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>Firebase 網頁設定</span>
+                <!-- 讓使用者可直接貼上 Firebase 設定內容。 -->
+                <textarea
+                  id="firebase-config"
+                  rows="6"
+                  placeholder="請把 Firebase Console 提供的 firebaseConfig 整段貼到這裡，例如：const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"
+                ></textarea>
+              </label>
+              <!-- 同步設定按鈕列。 -->
+              <div class="sync-actions">
+                <!-- 儲存 Firebase 設定。 -->
+                <button id="save-sync-config" type="button" class="button button--primary">儲存同步設定</button>
+                <!-- 清除 Firebase 設定。 -->
+                <button id="clear-sync-config" type="button" class="button button--ghost">清除同步設定</button>
+              </div>
+              <!-- 顯示簡短操作提醒。 -->
+              <p class="sync-help">
+                第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore，再把設定貼進來。
+              </p>
+              <!-- 帳號登入欄位區塊。 -->
+              <div class="field-grid">
+                <!-- Email 欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>Email</span>
+                  <!-- 讓使用者輸入登入 Email。 -->
+                  <input id="sync-email" type="email" placeholder="例如：you@example.com" autocomplete="username" />
+                </label>
+                <!-- 密碼欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>密碼</span>
+                  <!-- 讓使用者輸入登入密碼。 -->
+                  <input id="sync-password" type="password" placeholder="至少 6 碼" autocomplete="current-password" />
+                </label>
+              </div>
+              <!-- 帳號操作按鈕列。 -->
+              <div class="sync-actions">
+                <!-- 建立同步帳號。 -->
+                <button id="register-sync-account" type="button" class="button button--ghost">註冊帳號</button>
+                <!-- 登入同步帳號。 -->
+                <button id="login-sync-account" type="button" class="button button--primary">登入同步</button>
+                <!-- 登出同步帳號。 -->
+                <button id="logout-sync-account" type="button" class="button button--ghost">登出同步</button>
+              </div>
+            </div>
+          </section>
+
           <!-- 草稿儲存區塊。 -->
           <section class="form-section">
             <!-- 顯示區塊標題。 -->
             <h3>草稿儲存</h3>
             <!-- 說明目前草稿儲存位置。 -->
-            <p class="section-note">家訪完可先存到目前這台裝置的瀏覽器資料庫，之後再回來載入整理。</p>
+            <p id="draft-section-note" class="section-note">家訪完可先存到目前這台裝置的瀏覽器資料庫，之後再回來載入整理。</p>
             <!-- 草稿操作區。 -->
             <div class="draft-box">
               <!-- 草稿操作按鈕列。 -->

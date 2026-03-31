@@ -1,5 +1,5 @@
 // 設定快取版本名稱，更新內容時可修改版本來刷新舊快取。
-const CACHE_NAME = "care-visit-app-v3";
+const CACHE_NAME = "care-visit-app-v4";
 // 定義首次安裝時要預先快取的核心檔案。
 const APP_SHELL = ["./", "./index.html", "./install.html", "./manifest.webmanifest", "./favicon.svg"];
 
