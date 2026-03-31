@@ -1,0 +1,176 @@
+<!-- 宣告這是一份 HTML5 文件。 -->
+<!DOCTYPE html>
+<!-- 設定網頁語系為繁體中文。 -->
+<html lang="zh-Hant">
+<!-- 開始網頁的標頭區塊。 -->
+<head>
+  <!-- 指定文字編碼為 UTF-8，避免中文亂碼。 -->
+  <meta charset="UTF-8" />
+  <!-- 讓手機與 iPad 使用正確縮放。 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 提供搜尋摘要與分享說明。 -->
+  <meta
+    name="description"
+    content="個管家訪紀錄工具 iPad 安裝教學，說明如何用 Safari 加入主畫面並像 App 一樣使用。"
+  />
+  <!-- 設定瀏覽器主題色。 -->
+  <meta name="theme-color" content="#b85c38" />
+  <!-- 讓 iPad / iPhone 可使用主畫面 App 模式。 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 設定主畫面 App 名稱。 -->
+  <meta name="apple-mobile-web-app-title" content="家訪紀錄" />
+  <!-- 設定 iOS 狀態列樣式。 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <!-- 避免 iOS 自動把數字辨識成電話。 -->
+  <meta name="format-detection" content="telephone=no" />
+  <!-- 設定瀏覽器分頁標題。 -->
+  <title>iPad 安裝教學｜個管家訪紀錄工具</title>
+  <!-- 設定網站圖示。 -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <!-- 提供 iPad / iPhone 主畫面圖示。 -->
+  <link rel="apple-touch-icon" href="./favicon.svg" />
+  <!-- 提供安裝到主畫面的網站設定。 -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <!-- 載入共用樣式表。 -->
+  <link rel="stylesheet" crossorigin href="./assets/styles-BOqEI7mK.css">
+</head>
+<!-- 開始網頁主體內容。 -->
+<body>
+  <!-- 外層容器用來控制整體版面寬度。 -->
+  <div class="page-shell">
+    <!-- 頁首區塊顯示教學名稱與用途。 -->
+    <header class="hero">
+      <!-- 顯示小標籤。 -->
+      <p class="hero__eyebrow">iPad 使用教學</p>
+      <!-- 顯示主標題。 -->
+      <h1>把家訪紀錄工具加入主畫面</h1>
+      <!-- 說明這頁的用途。 -->
+      <p class="hero__intro">
+        這個工具是 PWA 網頁 App，在 iPad 上不需要從 App Store 安裝，只要用 Safari 開啟後加入主畫面，就會更像真正的 App。
+      </p>
+      <!-- 提供回到工具首頁的按鈕。 -->
+      <div class="hero__actions">
+        <!-- 返回主工具頁。 -->
+        <a class="button button-link button--primary" href="./index.html">回到家訪紀錄工具</a>
+      </div>
+    </header>
+
+    <!-- 主要教學內容區。 -->
+    <main class="guide-layout">
+      <!-- 左側卡片放安裝步驟。 -->
+      <section class="panel">
+        <!-- 顯示區塊標題。 -->
+        <div class="panel__heading">
+          <!-- 顯示教學標題。 -->
+          <h2>三步完成安裝</h2>
+          <!-- 說明安裝前提。 -->
+          <p>請務必使用 iPad 的 Safari 開啟工具網址，再依序完成下面步驟。</p>
+        </div>
+
+        <!-- 安裝步驟卡片群組。 -->
+        <div class="guide-stack">
+          <!-- 第一步卡片。 -->
+          <article class="guide-card">
+            <!-- 顯示步驟號碼。 -->
+            <div class="guide-card__number">1</div>
+            <!-- 顯示步驟內容。 -->
+            <div class="guide-card__content">
+              <!-- 顯示步驟標題。 -->
+              <h3>用 Safari 打開工具網址</h3>
+              <!-- 顯示步驟說明。 -->
+              <p>請先在 iPad 上用 Safari 開啟這個工具，不要從 LINE、Messenger 或其他 App 內建瀏覽器打開。</p>
+              <!-- 顯示補充提醒。 -->
+              <div class="guide-shot">
+                <strong>重點：</strong>
+                只有 Safari 比較穩定支援「加入主畫面」與相機權限。
+              </div>
+            </div>
+          </article>
+
+          <!-- 第二步卡片。 -->
+          <article class="guide-card">
+            <!-- 顯示步驟號碼。 -->
+            <div class="guide-card__number">2</div>
+            <!-- 顯示步驟內容。 -->
+            <div class="guide-card__content">
+              <!-- 顯示步驟標題。 -->
+              <h3>點分享按鈕</h3>
+              <!-- 顯示步驟說明。 -->
+              <p>在 Safari 底部或頂部工具列找到分享按鈕，圖示通常是方框上方有一支向上的箭頭。</p>
+              <!-- 顯示補充提醒。 -->
+              <div class="guide-shot">
+                <strong>如果看不到：</strong>
+                先輕點頁面一次，讓 Safari 工具列重新出現。
+              </div>
+            </div>
+          </article>
+
+          <!-- 第三步卡片。 -->
+          <article class="guide-card">
+            <!-- 顯示步驟號碼。 -->
+            <div class="guide-card__number">3</div>
+            <!-- 顯示步驟內容。 -->
+            <div class="guide-card__content">
+              <!-- 顯示步驟標題。 -->
+              <h3>選加入主畫面</h3>
+              <!-- 顯示步驟說明。 -->
+              <p>在分享清單往下找到「加入主畫面」，確認名稱後按「加入」，之後桌面就會出現這個工具圖示。</p>
+              <!-- 顯示補充提醒。 -->
+              <div class="guide-shot">
+                <strong>完成後：</strong>
+                之後從主畫面直接開啟，體驗會比一般瀏覽器分頁更像 App。
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 右側卡片放補充提醒。 -->
+      <section class="panel">
+        <!-- 顯示區塊標題。 -->
+        <div class="panel__heading">
+          <!-- 顯示提醒標題。 -->
+          <h2>使用前提醒</h2>
+          <!-- 說明這一區的用途。 -->
+          <p>這些細節先確認好，iPad 使用會更穩。</p>
+        </div>
+
+        <!-- 提醒卡片群組。 -->
+        <div class="guide-stack">
+          <!-- HTTPS 提醒卡片。 -->
+          <article class="output-card">
+            <!-- 顯示卡片標題。 -->
+            <h3>需要 HTTPS 網址</h3>
+            <!-- 顯示卡片內容。 -->
+            <p>如果你要使用拍照、加入主畫面、離線快取等功能，建議把工具部署在 HTTPS 網址上，iPad 支援會比較完整。</p>
+          </article>
+
+          <!-- 草稿位置提醒卡片。 -->
+          <article class="output-card">
+            <!-- 顯示卡片標題。 -->
+            <h3>草稿先存在這台 iPad</h3>
+            <!-- 顯示卡片內容。 -->
+            <p>目前草稿會先存在這台 iPad 的瀏覽器資料庫裡，所以如果換裝置或清除 Safari 網站資料，草稿不會自動同步過去。</p>
+          </article>
+
+          <!-- 常見問題卡片。 -->
+          <article class="output-card">
+            <!-- 顯示卡片標題。 -->
+            <h3>如果看不到加入主畫面</h3>
+            <!-- 顯示卡片內容。 -->
+            <p>常見原因是現在不是用 Safari 開啟，或網址還不是正式網站。可以先改用 Safari，或重新確認部署網址是否正常。</p>
+          </article>
+
+          <!-- 行動提示卡片。 -->
+          <article class="output-card output-card--note">
+            <!-- 顯示卡片標題。 -->
+            <h3>建議做法</h3>
+            <!-- 顯示卡片內容。 -->
+            <p>如果你要固定給 iPad 使用，下一步最適合把這份 PWA 放到 GitHub Pages 或其他 HTTPS 網址，這樣安裝最方便。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
