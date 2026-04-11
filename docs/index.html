@@ -1091,7 +1091,7 @@
                     <strong id="sync-mode-badge" class="mode-badge">本機模式</strong>
                   </p>
                   <!-- 顯示同步狀態說明。 -->
-                  <p id="sync-status" class="sync-status">尚未設定雲端同步，目前草稿只會存放在這台裝置。</p>
+                  <p id="sync-status" class="sync-status">尚未設定個人雲端同步，目前草稿只會存放在這台裝置。</p>
                   <!-- 顯示使用者現在該做的下一步。 -->
                   <p id="sync-next-step" class="sync-next-step">下一步：請先貼上整段 firebaseConfig，再按下「儲存同步設定」。</p>
                 </div>
@@ -1119,9 +1119,14 @@
                   <textarea
                     id="firebase-config"
                     rows="6"
-                    placeholder="請把 Firebase Console 提供的 firebaseConfig 整段貼到這裡，例如：const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"
+                    placeholder="可直接貼上 { ... }、const firebaseConfig = { ... };，或 Firebase Console 複製的整段 Web 程式碼；系統會自動抓出 firebaseConfig。"
                   ></textarea>
                 </label>
+                <!-- 顯示可接受的貼法說明。 -->
+                <p class="field-hint">
+                  可直接貼上 <code>{ ... }</code>、<code>const firebaseConfig = { ... };</code>，也可直接貼整段 Web 初始化程式碼；不用手動刪掉
+                  <code>measurementId</code>、<code>initializeApp</code> 或 <code>getAnalytics</code> 相關行。
+                </p>
                 <!-- 同步設定按鈕列。 -->
                 <div class="sync-actions">
                   <!-- 儲存 Firebase 設定。 -->
@@ -1131,8 +1136,57 @@
                 </div>
                 <!-- 顯示簡短操作提醒。 -->
                 <p class="sync-help">
-                  第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore，再把設定貼進來。這一版只會同步文字資料，照片仍留在原本拍攝的裝置。
+                  第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore。這一版只會同步文字資料，照片仍留在原本拍攝的裝置。
                 </p>
+                <!-- 顯示 Firebase 後台設定重點。 -->
+                <div class="sync-guide">
+                  <!-- 顯示小標題。 -->
+                  <h4>Firebase 後台設定重點</h4>
+                  <!-- 顯示白話說明。 -->
+                  <p class="sync-guide__intro">這個 APP 使用 Email / Password + Firestore；如果是第一次設定，照下面三步即可。</p>
+                  <!-- 用清單整理後台操作步驟。 -->
+                  <ol class="sync-guide__list">
+                    <!-- 顯示 Authentication 設定說明。 -->
+                    <li><strong>Authentication &gt; 登入方法</strong>：啟用「電子郵件/密碼」，不要開「電子郵件連結」。Dynamic Links 提醒可先忽略。</li>
+                    <!-- 顯示 Firestore 資料庫說明。 -->
+                    <li><strong>Firestore Database</strong>：確認資料庫已建立，且為 Native mode。</li>
+                    <!-- 顯示資料路徑與規則說明。 -->
+                    <li><strong>資料路徑與規則</strong>：雲端草稿只會寫入 <code>users/{uid}/drafts/{draftId}</code>，每位使用者只能讀寫自己的資料。</li>
+                  </ol>
+                  <!-- 顯示可直接複製的 Firestore 規則。 -->
+                  <label class="field">
+                    <!-- 顯示欄位名稱。 -->
+                    <span>Firestore 規則</span>
+                    <!-- 提供可複製的規則內容。 -->
+                    <textarea id="firestore-rules-snippet" class="code-textarea" rows="16" readonly>// 固定使用 Firestore 規則第 2 版。
+rules_version = '2';
+service cloud.firestore {
+  // 套用到預設資料庫。
+  match /databases/{database}/documents {
+    // 只允許存取自己的雲端草稿。
+    match /users/{userId}/drafts/{draftId} {
+      // 必須先登入，且 uid 要和路徑中的 userId 相同。
+      allow read, write: if request.auth != null &amp;&amp; request.auth.uid == userId;
+    }
+
+    // 其他所有文件一律拒絕。
+    match /{document=**} {
+      // 不開放讀取與寫入。
+      allow read, write: if false;
+    }
+  }
+}</textarea>
+                  </label>
+                  <!-- 顯示規則複製按鈕。 -->
+                  <div class="sync-actions sync-actions--compact">
+                    <!-- 提供一鍵複製規則。 -->
+                    <button type="button" class="button button--ghost" data-copy-target="firestore-rules-snippet">複製 Firestore 規則</button>
+                  </div>
+                  <!-- 顯示同步範圍提醒。 -->
+                  <p class="sync-help sync-help--compact">
+                    同步上雲的內容包含表單文字、ADL / IADL、問題勾選與訪視觀察；照片仍只存在原本拍攝或上傳的裝置。
+                  </p>
+                </div>
                 <!-- 帳號登入欄位區塊。 -->
                 <div class="field-grid field-grid--desktop-2">
                   <!-- Email 欄位。 -->

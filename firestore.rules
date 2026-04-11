@@ -1,0 +1,19 @@
+// 固定使用 Firestore 規則第 2 版。
+rules_version = '2';
+
+service cloud.firestore {
+  // 套用到預設資料庫。
+  match /databases/{database}/documents {
+    // 只允許使用者讀寫自己帳號底下的草稿。
+    match /users/{userId}/drafts/{draftId} {
+      // 必須先登入，且登入 uid 必須和路徑中的 userId 相同。
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // 其他所有文件路徑一律拒絕。
+    match /{document=**} {
+      // 不開放讀取與寫入。
+      allow read, write: if false;
+    }
+  }
+}
