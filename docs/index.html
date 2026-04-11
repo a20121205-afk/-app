@@ -11,7 +11,7 @@
   <!-- 提供搜尋引擎與分享摘要的簡短說明。 -->
   <meta
     name="description"
-    content="長照個案管理家訪紀錄輔助工具，支援 ADL/IADL 評估、拍照整理、草稿儲存與家訪紀錄輸出。"
+    content="長照個案管理家訪紀錄輔助工具，支援家訪評估表重整、ADL/IADL 評估、拍照整理、草稿儲存與家訪紀錄輸出。"
   />
   <!-- 設定瀏覽器主題色。 -->
   <meta name="theme-color" content="#b85c38" />
@@ -44,10 +44,10 @@
       <!-- 顯示小標籤，讓使用者快速知道工具定位。 -->
       <p class="hero__eyebrow">長照個案管理紀錄輔助工具</p>
       <!-- 顯示主標題。 -->
-      <h1>家訪紀錄工具</h1>
+      <h1>家訪評估表重整版</h1>
       <!-- 用白話文說明這一版的主要用途。 -->
       <p class="hero__intro">
-        先把家訪表單、照片整理與紀錄輸出做好，讓你可以邊訪視邊記錄，回來後快速整理成可貼系統的內容。
+        這一版改成更適合手機與 iPad 的家訪流程，先填基本訪視與醫療照護，再依現場狀況逐段補完身心、功能、環境與照顧計畫。
       </p>
       <!-- 顯示常用入口按鈕。 -->
       <div class="hero__actions">
@@ -65,47 +65,110 @@
           <!-- 顯示輸入區名稱。 -->
           <h2>訪視資料輸入</h2>
           <!-- 提醒使用者這一區要填什麼。 -->
-          <p>依序填寫基本資料、功能狀況、觀察紀錄與照片。</p>
+          <p>先完成上方必填，再依實際訪視內容展開各區塊；每題都盡量改成先判斷、再補充細節。</p>
         </div>
 
         <!-- 家訪表單，送出時由 JavaScript 進行整理。 -->
         <form id="visit-form" class="visit-form">
-          <!-- 基本資料區塊。 -->
-          <section class="form-section">
-            <!-- 區塊標題。 -->
-            <h3>基本資料</h3>
-            <!-- 欄位群組用來排列輸入框。 -->
-            <div class="field-grid">
-              <!-- 個案姓名輸入欄位。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>個案姓名</span>
-                <!-- 讓使用者輸入姓名。 -->
-                <input id="client-name" name="clientName" type="text" placeholder="例如：王○○" />
-              </label>
-              <!-- 訪視日期輸入欄位。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>訪視日期</span>
-                <!-- 使用日期欄位方便快速選擇。 -->
-                <input id="visit-date" name="visitDate" type="date" />
-              </label>
-              <!-- 訪視方式輸入欄位。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>訪視方式</span>
-                <!-- 提供家訪或電訪等選項。 -->
-                <select id="visit-type" name="visitType">
-                  <!-- 預設選項。 -->
-                  <option value="家訪">家訪</option>
-                  <!-- 備用選項，方便未來擴充。 -->
-                  <option value="電訪">電訪</option>
-                </select>
-              </label>
+          <!-- 流程提示區。 -->
+          <section class="form-section workflow-note">
+            <!-- 顯示流程小提醒。 -->
+            <p class="workflow-note__text">建議順序：基本訪視資訊 → 病史與醫療照護 → 身心與安全 → ADL / IADL → 居住環境 → 現行照顧計畫 → 訪視觀察整理。</p>
+            <!-- 提供快速跳轉連結。 -->
+            <div class="section-jump">
+              <!-- 基本訪視資訊連結。 -->
+              <a class="jump-link" href="#section-basic">基本訪視</a>
+              <!-- 病史與醫療照護連結。 -->
+              <a class="jump-link" href="#section-medical">病史醫療</a>
+              <!-- 身心與安全狀況連結。 -->
+              <a class="jump-link" href="#section-mental">身心安全</a>
+              <!-- ADL 連結。 -->
+              <a class="jump-link" href="#section-adl">ADL</a>
+              <!-- IADL 連結。 -->
+              <a class="jump-link" href="#section-iadl">IADL</a>
+              <!-- 居住環境連結。 -->
+              <a class="jump-link" href="#section-home">居住環境</a>
+              <!-- 照顧計畫連結。 -->
+              <a class="jump-link" href="#section-plan">照顧計畫</a>
+              <!-- 訪視觀察連結。 -->
+              <a class="jump-link" href="#section-notes">訪視觀察</a>
+            </div>
+          </section>
+
+          <!-- 基本訪視資訊區塊。 -->
+          <section id="section-basic" class="form-section form-card form-card--static">
+            <!-- 區塊標題列。 -->
+            <div class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>基本訪視資訊</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">先完成訪視基本資料、轉介與照顧者資訊，方便後續家訪紀錄直接帶入開頭。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">先填這區</span>
+            </div>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 基本欄位群組。 -->
+              <div class="field-grid field-grid--desktop-2">
+                <!-- 個案姓名欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>個案姓名</span>
+                  <!-- 個案姓名輸入框。 -->
+                  <input id="client-name" name="clientName" type="text" placeholder="例如：王○○" />
+                </label>
+                <!-- 訪視日期欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>訪視日期</span>
+                  <!-- 使用日期欄位方便快速選擇。 -->
+                  <input id="visit-date" name="visitDate" type="date" />
+                </label>
+                <!-- 訪視方式欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>訪視方式</span>
+                  <!-- 提供家訪或電訪等選項。 -->
+                  <select id="visit-type" name="visitType">
+                    <!-- 預設選項。 -->
+                    <option value="家訪">家訪</option>
+                    <!-- 備用選項。 -->
+                    <option value="電訪">電訪</option>
+                  </select>
+                </label>
+                <!-- 轉介方欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>轉介方</span>
+                  <!-- 轉介方輸入框。 -->
+                  <input id="referral-source" name="referralSource" type="text" placeholder="例如：醫院出院準備、家屬轉介" />
+                </label>
+                <!-- 陪同訪視欄位。 -->
+                <label class="field field--full">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>陪同訪視</span>
+                  <!-- 陪同訪視輸入框。 -->
+                  <input id="visit-companion" name="visitCompanion" type="text" placeholder="例如：女兒、案媳、居服員" />
+                </label>
+                <!-- 此次申請原因欄位。 -->
+                <label class="field field--full">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>此次申請原因</span>
+                  <!-- 申請原因文字區。 -->
+                  <textarea id="application-reason" name="applicationReason" rows="3" placeholder="例如：近期體力下降，日常生活需協助，欲了解長照服務資源。"></textarea>
+                </label>
+              </div>
+
               <!-- 主要照顧者欄位。 -->
-              <div class="field field--full">
+              <div class="field field--full field-block">
                 <!-- 顯示欄位名稱。 -->
                 <span>主要照顧者</span>
+                <!-- 顯示補充說明。 -->
+                <p class="field-hint">主要照顧者改為單選，若選「其他」可自行輸入；次要照顧者勾選後才展開。</p>
                 <!-- 勾選主要照顧者類型。 -->
                 <div class="choice-grid">
                   <!-- 配偶選項。 -->
@@ -228,207 +291,906 @@
             </div>
           </section>
 
-          <!-- ADL 區塊由 JavaScript 自動產生。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>ADL 基本日常生活功能</h3>
-            <!-- 提示使用者如何選擇等級。 -->
-            <p class="section-note">每一項都可選擇：可獨立完成、需部分協助、完全依賴。</p>
-            <!-- 放置 ADL 選項的容器。 -->
-            <div id="adl-fields" class="rating-grid"></div>
-          </section>
+          <!-- 病史與醫療照護區塊。 -->
+          <section id="section-medical" class="form-section form-card form-card--static">
+            <!-- 區塊標題列。 -->
+            <div class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>病史與醫療照護</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">把過去病史、就醫方式、管路與傷口獨立拆開，避免全部擠成同一行。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">開頭一起填</span>
+            </div>
 
-          <!-- IADL 區塊由 JavaScript 自動產生。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>IADL 工具性日常生活功能</h3>
-            <!-- 提示使用者如何選擇等級。 -->
-            <p class="section-note">可依訪視狀況快速勾選目前功能程度。</p>
-            <!-- 放置 IADL 選項的容器。 -->
-            <div id="iadl-fields" class="rating-grid"></div>
-          </section>
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 病史欄位。 -->
+              <label class="field field--full">
+                <!-- 顯示欄位名稱。 -->
+                <span>過去病史</span>
+                <!-- 病史文字區。 -->
+                <textarea id="past-history" name="pastHistory" rows="3" placeholder="例如：高血壓、糖尿病、腦中風病史。"></textarea>
+              </label>
+              <!-- 就醫與交通欄位群組。 -->
+              <div class="field-grid field-grid--desktop-2">
+                <!-- 就醫情形欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>就醫情形</span>
+                  <!-- 就醫情形下拉選單。 -->
+                  <select id="medical-visit-status" name="medicalVisitStatus">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 固定就醫選項。 -->
+                    <option value="固定就醫">固定就醫</option>
+                    <!-- 視需要就醫選項。 -->
+                    <option value="視需要就醫">視需要就醫</option>
+                    <!-- 近期少就醫選項。 -->
+                    <option value="近期少就醫">近期少就醫</option>
+                  </select>
+                </label>
+                <!-- 就醫院所欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>就醫院所</span>
+                  <!-- 就醫院所輸入框。 -->
+                  <input id="medical-hospital" name="medicalHospital" type="text" placeholder="例如：高醫、榮總、診所" />
+                </label>
+                <!-- 接送方式欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>接送方式</span>
+                  <!-- 接送方式下拉選單。 -->
+                  <select id="transport-method" name="transportMethod">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 自行前往選項。 -->
+                    <option value="自行前往">自行前往</option>
+                    <!-- 家屬接送選項。 -->
+                    <option value="家屬接送">家屬接送</option>
+                    <!-- 復康巴士選項。 -->
+                    <option value="復康巴士">復康巴士</option>
+                    <!-- 計程車選項。 -->
+                    <option value="計程車">計程車</option>
+                    <!-- 其他選項。 -->
+                    <option value="其他">其他</option>
+                  </select>
+                </label>
+                <!-- 交通工具欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>交通工具／補充</span>
+                  <!-- 交通工具輸入框。 -->
+                  <input id="transport-tool" name="transportTool" type="text" placeholder="例如：機車、汽車、由女兒陪同" />
+                </label>
+              </div>
 
-          <!-- 家訪觀察區塊。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>家訪觀察與補充</h3>
-            <!-- 欄位群組用來排列文字輸入框。 -->
-            <div class="field-grid field-grid--single">
-              <!-- 家訪觀察欄位。 -->
-              <label class="field">
+              <!-- 管路照顧欄位。 -->
+              <div class="field field--full field-block">
                 <!-- 顯示欄位名稱。 -->
-                <span>家訪觀察</span>
-                <!-- 讓使用者輸入現場觀察內容。 -->
-                <textarea id="observation" name="observation" rows="4" placeholder="例如：案家環境整潔，個案可簡短對答，移位需扶持。"></textarea>
-              </label>
-              <!-- 個案或家屬主述欄位。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>個案／家屬主述</span>
-                <!-- 讓使用者記錄主要回饋。 -->
-                <textarea id="statement" name="statement" rows="4" placeholder="例如：女兒表示近期夜間如廁次數增加，照顧壓力較高。"></textarea>
-              </label>
-              <!-- 其他補充欄位。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>其他補充</span>
-                <!-- 讓使用者補充未涵蓋資訊。 -->
-                <textarea id="extra-note" name="extraNote" rows="3" placeholder="例如：本次同步查看輔具使用情形。"></textarea>
-              </label>
+                <span>管路照顧</span>
+                <!-- 顯示補充說明。 -->
+                <p class="field-hint">未勾選代表目前無特殊管路；若有其他類型可直接補充。</p>
+                <!-- 管路選項。 -->
+                <div class="chip-grid">
+                  <!-- 鼻胃管選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="tubeCare" value="鼻胃管" />
+                    <!-- 顯示選項文字。 -->
+                    <span>鼻胃管</span>
+                  </label>
+                  <!-- 導尿管選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="tubeCare" value="導尿管" />
+                    <!-- 顯示選項文字。 -->
+                    <span>導尿管</span>
+                  </label>
+                  <!-- 胃造口選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="tubeCare" value="胃造口" />
+                    <!-- 顯示選項文字。 -->
+                    <span>胃造口</span>
+                  </label>
+                  <!-- 腸造口選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="tubeCare" value="腸造口" />
+                    <!-- 顯示選項文字。 -->
+                    <span>腸造口</span>
+                  </label>
+                </div>
+                <!-- 管路其他補充欄位。 -->
+                <input id="tube-care-other" name="tubeCareOther" type="text" placeholder="其他管路或補充說明，例如：更換頻率、照顧重點" />
+              </div>
+
+              <!-- 居護與傷口欄位群組。 -->
+              <div class="field-grid">
+                <!-- 居護單位欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>居護（醫療）單位</span>
+                  <!-- 居護單位輸入框。 -->
+                  <input id="home-nursing-unit" name="homeNursingUnit" type="text" placeholder="例如：某某居家護理所" />
+                </label>
+                <!-- 傷口欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>傷口情形</span>
+                  <!-- 傷口文字區。 -->
+                  <textarea id="wound-status" name="woundStatus" rows="3" placeholder="例如：右足傷口換藥中，目前由居護追蹤。"></textarea>
+                </label>
+              </div>
             </div>
           </section>
 
-          <!-- 問題勾選區塊。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>問題勾選</h3>
-            <!-- 提醒這一區是可選填。 -->
-            <p class="section-note">這一區可不勾，系統也會依輸入內容自動推論一些問題。</p>
-            <!-- 放置問題核取方塊的容器。 -->
-            <div id="issue-fields" class="check-grid"></div>
-          </section>
+          <!-- 身心與安全狀況區塊。 -->
+          <details id="section-mental" class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>身心與安全狀況</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">把意識、感官、表達、記憶、睡眠、跌倒與情緒拆開，方便現場快速點選。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">可收合</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 身心狀況欄位群組。 -->
+              <div class="field-grid field-grid--desktop-2">
+                <!-- 意識狀態欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>意識狀態</span>
+                  <!-- 意識狀態下拉選單。 -->
+                  <select id="consciousness" name="consciousness">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 清楚選項。 -->
+                    <option value="清楚">清楚</option>
+                    <!-- 混亂選項。 -->
+                    <option value="混亂">混亂</option>
+                    <!-- 呆滯選項。 -->
+                    <option value="呆滯">呆滯</option>
+                    <!-- 嗜睡選項。 -->
+                    <option value="嗜睡">嗜睡</option>
+                    <!-- 反應慢選項。 -->
+                    <option value="反應慢">反應慢</option>
+                  </select>
+                </label>
+                <!-- 視力欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>視力</span>
+                  <!-- 視力下拉選單。 -->
+                  <select id="vision" name="vision">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 正常選項。 -->
+                    <option value="正常">正常</option>
+                    <!-- 模糊選項。 -->
+                    <option value="模糊">模糊</option>
+                    <!-- 可見大字體選項。 -->
+                    <option value="可見大字體">可見大字體</option>
+                    <!-- 可見小字體選項。 -->
+                    <option value="可見小字體">可見小字體</option>
+                    <!-- 白內障術後選項。 -->
+                    <option value="白內障術後">白內障術後</option>
+                    <!-- 白內障未術選項。 -->
+                    <option value="白內障未術">白內障未術</option>
+                    <!-- 失明選項。 -->
+                    <option value="失明">失明</option>
+                  </select>
+                </label>
+                <!-- 聽力欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>聽力</span>
+                  <!-- 聽力下拉選單。 -->
+                  <select id="hearing" name="hearing">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 正常選項。 -->
+                    <option value="正常">正常</option>
+                    <!-- 輕度受損選項。 -->
+                    <option value="輕度受損">輕度受損</option>
+                    <!-- 中度受損選項。 -->
+                    <option value="中度受損">中度受損</option>
+                    <!-- 重度受損選項。 -->
+                    <option value="重度受損">重度受損</option>
+                    <!-- 使用助聽器選項。 -->
+                    <option value="使用助聽器">使用助聽器</option>
+                  </select>
+                </label>
+                <!-- 表達理解欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>表達理解</span>
+                  <!-- 表達理解下拉選單。 -->
+                  <select id="expression-understanding" name="expressionUnderstanding">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 正常選項。 -->
+                    <option value="正常">正常</option>
+                    <!-- 含糊不清選項。 -->
+                    <option value="含糊不清">含糊不清</option>
+                    <!-- 答非所問選項。 -->
+                    <option value="答非所問">答非所問</option>
+                  </select>
+                </label>
+                <!-- 短期記憶欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>短期記憶</span>
+                  <!-- 短期記憶下拉選單。 -->
+                  <select id="short-term-memory" name="shortTermMemory">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 正常選項。 -->
+                    <option value="正常">正常</option>
+                    <!-- 偶有遺忘選項。 -->
+                    <option value="偶有遺忘">偶有遺忘</option>
+                    <!-- 明顯障礙選項。 -->
+                    <option value="明顯障礙">明顯障礙</option>
+                  </select>
+                </label>
+                <!-- 算數能力欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>算數能力</span>
+                  <!-- 算數能力下拉選單。 -->
+                  <select id="arithmetic-ability" name="arithmeticAbility">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 正常選項。 -->
+                    <option value="正常">正常</option>
+                    <!-- 需提示選項。 -->
+                    <option value="需提示">需提示</option>
+                    <!-- 困難選項。 -->
+                    <option value="困難">困難</option>
+                  </select>
+                </label>
+                <!-- 身高欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>身高</span>
+                  <!-- 身高輸入框。 -->
+                  <input id="height" name="height" type="text" placeholder="例如：160 cm" />
+                </label>
+                <!-- 體重欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>體重</span>
+                  <!-- 體重輸入框。 -->
+                  <input id="weight" name="weight" type="text" placeholder="例如：50 kg" />
+                </label>
+                <!-- 睡眠欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>睡眠</span>
+                  <!-- 睡眠下拉選單。 -->
+                  <select id="sleep-status" name="sleepStatus">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 正常選項。 -->
+                    <option value="正常">正常</option>
+                    <!-- 失眠未服藥選項。 -->
+                    <option value="失眠（未服藥）">失眠（未服藥）</option>
+                    <!-- 失眠有服藥選項。 -->
+                    <option value="失眠（有服藥）">失眠（有服藥）</option>
+                    <!-- 日夜顛倒選項。 -->
+                    <option value="日夜顛倒">日夜顛倒</option>
+                  </select>
+                </label>
+                <!-- 睡眠補充欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>睡眠補充</span>
+                  <!-- 睡眠補充輸入框。 -->
+                  <input id="sleep-detail" name="sleepDetail" type="text" placeholder="例如：夜間易醒、白天補眠" />
+                </label>
+                <!-- 跌倒補充欄位。 -->
+                <label class="field field--full">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>跌倒／安全補充</span>
+                  <!-- 跌倒補充文字區。 -->
+                  <textarea id="fall-record" name="fallRecord" rows="3" placeholder="例如：近三個月跌倒 1 次，走路不穩，外出需陪同。"></textarea>
+                </label>
+              </div>
+
+              <!-- 情緒與行為欄位。 -->
+              <div class="field field--full field-block">
+                <!-- 顯示欄位名稱。 -->
+                <span>情緒／行為觀察</span>
+                <!-- 顯示補充說明。 -->
+                <p class="field-hint">可複選，若只有一般狀況可勾「正常」。</p>
+                <!-- 情緒與行為選項。 -->
+                <div class="chip-grid">
+                  <!-- 正常選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="正常" />
+                    <!-- 顯示選項文字。 -->
+                    <span>正常</span>
+                  </label>
+                  <!-- 遊走選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="遊走" />
+                    <!-- 顯示選項文字。 -->
+                    <span>遊走</span>
+                  </label>
+                  <!-- 幻覺選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="幻覺" />
+                    <!-- 顯示選項文字。 -->
+                    <span>幻覺</span>
+                  </label>
+                  <!-- 妄想選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="妄想" />
+                    <!-- 顯示選項文字。 -->
+                    <span>妄想</span>
+                  </label>
+                  <!-- 重複選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="重複" />
+                    <!-- 顯示選項文字。 -->
+                    <span>重複</span>
+                  </label>
+                  <!-- 憂鬱選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="憂鬱" />
+                    <!-- 顯示選項文字。 -->
+                    <span>憂鬱</span>
+                  </label>
+                  <!-- 抗拒選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="emotionBehavior" value="抗拒" />
+                    <!-- 顯示選項文字。 -->
+                    <span>抗拒</span>
+                  </label>
+                </div>
+                <!-- 情緒與行為其他補充。 -->
+                <input id="emotion-other" name="emotionOther" type="text" placeholder="其他情緒或行為補充，例如：夜間易躁動、白天易焦慮" />
+              </div>
+            </div>
+          </details>
+
+          <!-- ADL 區塊。 -->
+          <details id="section-adl" class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>ADL 基本功能</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">每一題先選功能等級，再視需要補充嗆咳、輔具、距離或協助方式等細節。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">E1－E10</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 放置 ADL 選項的容器。 -->
+              <div id="adl-fields" class="rating-grid"></div>
+            </div>
+          </details>
+
+          <!-- IADL 區塊。 -->
+          <details id="section-iadl" class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>IADL 工具性功能</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">把電話、購物、備餐、家務、洗衣、外出交通、服藥與財務分開判斷，比較好連續填寫。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">F1－F8</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 放置 IADL 選項的容器。 -->
+              <div id="iadl-fields" class="rating-grid"></div>
+            </div>
+          </details>
+
+          <!-- 居住環境區塊。 -->
+          <details id="section-home" class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>居住環境</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">將住宅型態、空間整潔、走道、浴廁與臥室獨立整理，回來較好轉成正式紀錄。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">環境觀察</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 住宅類型欄位群組。 -->
+              <div class="field-grid field-grid--desktop-2">
+                <!-- 住宅型態欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>住宅型態</span>
+                  <!-- 住宅型態下拉選單。 -->
+                  <select id="home-type" name="homeType">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 透天厝選項。 -->
+                    <option value="透天厝">透天厝</option>
+                    <!-- 平房選項。 -->
+                    <option value="平房">平房</option>
+                    <!-- 三合院選項。 -->
+                    <option value="三合院">三合院</option>
+                    <!-- 公寓選項。 -->
+                    <option value="公寓">公寓</option>
+                    <!-- 其他選項。 -->
+                    <option value="其他">其他</option>
+                  </select>
+                </label>
+                <!-- 電梯情形欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>電梯情形</span>
+                  <!-- 電梯情形下拉選單。 -->
+                  <select id="home-elevator" name="homeElevator">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 不適用選項。 -->
+                    <option value="不適用">不適用</option>
+                    <!-- 有電梯選項。 -->
+                    <option value="有電梯">有電梯</option>
+                    <!-- 無電梯選項。 -->
+                    <option value="無電梯">無電梯</option>
+                  </select>
+                </label>
+              </div>
+
+              <!-- 環境標記欄位。 -->
+              <div class="field field--full field-block">
+                <!-- 顯示欄位名稱。 -->
+                <span>空間與整潔觀察</span>
+                <!-- 顯示補充說明。 -->
+                <p class="field-hint">可複選，像是「狹窄＋整潔」或「寬敞＋堆積物品」都可同時勾選。</p>
+                <!-- 環境標記選項。 -->
+                <div class="chip-grid">
+                  <!-- 寬敞選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="environmentTags" value="寬敞" />
+                    <!-- 顯示選項文字。 -->
+                    <span>寬敞</span>
+                  </label>
+                  <!-- 狹窄選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="environmentTags" value="狹窄" />
+                    <!-- 顯示選項文字。 -->
+                    <span>狹窄</span>
+                  </label>
+                  <!-- 整潔選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="environmentTags" value="整潔" />
+                    <!-- 顯示選項文字。 -->
+                    <span>整潔</span>
+                  </label>
+                  <!-- 髒亂選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="environmentTags" value="髒亂" />
+                    <!-- 顯示選項文字。 -->
+                    <span>髒亂</span>
+                  </label>
+                  <!-- 異味選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="environmentTags" value="異味" />
+                    <!-- 顯示選項文字。 -->
+                    <span>異味</span>
+                  </label>
+                  <!-- 堆積物品選項。 -->
+                  <label class="chip-item">
+                    <!-- 核取方塊。 -->
+                    <input type="checkbox" name="environmentTags" value="堆積物品" />
+                    <!-- 顯示選項文字。 -->
+                    <span>堆積物品</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- 走道與浴廁欄位群組。 -->
+              <div class="field-grid">
+                <!-- 走道欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>走道</span>
+                  <!-- 走道下拉選單。 -->
+                  <select id="corridor-status" name="corridorStatus">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 平坦選項。 -->
+                    <option value="平坦">平坦</option>
+                    <!-- 有門檻選項。 -->
+                    <option value="有門檻">有門檻</option>
+                    <!-- 動線狹窄選項。 -->
+                    <option value="動線狹窄">動線狹窄</option>
+                    <!-- 需留意安全選項。 -->
+                    <option value="需留意安全">需留意安全</option>
+                  </select>
+                </label>
+                <!-- 浴廁欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>浴廁</span>
+                  <!-- 浴廁文字區。 -->
+                  <textarea id="bathroom-status" name="bathroomStatus" rows="3" placeholder="例如：有門檻、有扶手、地面易濕滑、可使用斜坡板。"></textarea>
+                </label>
+                <!-- 臥室欄位。 -->
+                <label class="field field--full">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>臥室</span>
+                  <!-- 臥室文字區。 -->
+                  <textarea id="bedroom-status" name="bedroomStatus" rows="3" placeholder="例如：個案住一樓，使用一般床鋪／電動床，空間尚可翻身移位。"></textarea>
+                </label>
+              </div>
+            </div>
+          </details>
+
+          <!-- 現行照顧計畫區塊。 -->
+          <details id="section-plan" class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>現行照顧計畫</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">把 CMS 與各項核定服務拆開，後續如果要做成正式可部署版，也比較容易再串接。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">服務概況</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- CMS 欄位。 -->
+              <label class="field">
+                <!-- 顯示欄位名稱。 -->
+                <span>CMS 級數</span>
+                <!-- CMS 輸入框。 -->
+                <input id="cms-level" name="cmsLevel" type="text" placeholder="例如：CMS 4 級" />
+              </label>
+              <!-- 各項服務欄位群組。 -->
+              <div class="field-grid">
+                <!-- 照顧服務欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>照顧服務</span>
+                  <!-- 照顧服務文字區。 -->
+                  <textarea id="care-service" name="careService" rows="3" placeholder="例如：輪派中，已核定每週幾次。"></textarea>
+                </label>
+                <!-- 專業服務欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>專業服務</span>
+                  <!-- 專業服務文字區。 -->
+                  <textarea id="professional-service" name="professionalService" rows="3" placeholder="例如：復能、護理、營養等核定情形。"></textarea>
+                </label>
+                <!-- 交通服務欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>交通服務</span>
+                  <!-- 交通服務文字區。 -->
+                  <textarea id="transport-service" name="transportService" rows="3" placeholder="例如：縣內 8 趟、縣外 4 趟，主要用於回診。"></textarea>
+                </label>
+                <!-- 喘息服務欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>喘息服務</span>
+                  <!-- 喘息服務文字區。 -->
+                  <textarea id="respite-service" name="respiteService" rows="3" placeholder="例如：核定期間、使用形式、目前是否使用中。"></textarea>
+                </label>
+                <!-- 短照服務欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>短照服務</span>
+                  <!-- 短照服務文字區。 -->
+                  <textarea id="short-care-service" name="shortCareService" rows="3" placeholder="例如：短照期間、是否有喘息區。"></textarea>
+                </label>
+                <!-- 居家醫師欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>居家醫師</span>
+                  <!-- 居家醫師下拉選單。 -->
+                  <select id="home-doctor" name="homeDoctor">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 同意選項。 -->
+                    <option value="同意">同意</option>
+                    <!-- 不同意選項。 -->
+                    <option value="不同意">不同意</option>
+                    <!-- 未討論選項。 -->
+                    <option value="未討論">未討論</option>
+                  </select>
+                </label>
+                <!-- 送藥到府欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>送藥到府</span>
+                  <!-- 送藥到府下拉選單。 -->
+                  <select id="medicine-delivery" name="medicineDelivery">
+                    <!-- 預設選項。 -->
+                    <option value="">請選擇</option>
+                    <!-- 同意選項。 -->
+                    <option value="同意">同意</option>
+                    <!-- 不同意選項。 -->
+                    <option value="不同意">不同意</option>
+                    <!-- 未討論選項。 -->
+                    <option value="未討論">未討論</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </details>
+
+          <!-- 訪視觀察與問題勾選區塊。 -->
+          <details id="section-notes" class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>訪視觀察與問題勾選</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">自由輸入觀察，再搭配問題勾選；即使不勾選，系統也會依內容推論可能問題。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">整理輸出</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 欄位群組用來排列文字輸入框。 -->
+              <div class="field-grid">
+                <!-- 家訪觀察欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>家訪觀察</span>
+                  <!-- 讓使用者輸入現場觀察內容。 -->
+                  <textarea id="observation" name="observation" rows="4" placeholder="例如：案家環境尚整潔，個案對答簡短，移位需扶持。"></textarea>
+                </label>
+                <!-- 個案或家屬主述欄位。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>個案／家屬主述</span>
+                  <!-- 讓使用者記錄主要回饋。 -->
+                  <textarea id="statement" name="statement" rows="4" placeholder="例如：女兒表示夜間如廁次數增加，照顧壓力偏高。"></textarea>
+                </label>
+                <!-- 其他補充欄位。 -->
+                <label class="field field--full">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>其他補充</span>
+                  <!-- 讓使用者補充未涵蓋資訊。 -->
+                  <textarea id="extra-note" name="extraNote" rows="3" placeholder="例如：本次同步查看輔具使用情形與就醫安排。"></textarea>
+                </label>
+              </div>
+
+              <!-- 問題勾選欄位。 -->
+              <div class="field field--full field-block">
+                <!-- 顯示欄位名稱。 -->
+                <span>問題勾選</span>
+                <!-- 顯示補充說明。 -->
+                <p class="field-hint">這一區可不勾，系統也會依觀察內容、功能狀況與環境資料自動整理部分問題。</p>
+                <!-- 放置問題核取方塊的容器。 -->
+                <div id="issue-fields" class="check-grid"></div>
+              </div>
+            </div>
+          </details>
 
           <!-- 照片區塊。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>拍照與照片整理</h3>
-            <!-- 用白話文說明可拍照或上傳。 -->
-            <p class="section-note">手機可直接拍照，電腦可上傳照片；照片只留在這台裝置的瀏覽器中。</p>
-            <!-- 拍照控制區。 -->
-            <div class="photo-actions">
-              <!-- 開啟裝置相機。 -->
-              <button id="start-camera" class="button button--ghost" type="button">開啟相機</button>
-              <!-- 拍攝目前畫面。 -->
-              <button id="capture-photo" class="button button--ghost" type="button">拍攝畫面</button>
-              <!-- 關閉相機串流。 -->
-              <button id="stop-camera" class="button button--ghost" type="button">關閉相機</button>
-              <!-- 使用 label 包住 input 讓按鈕比較好看。 -->
-              <label class="button button--primary" for="photo-input">新增照片</label>
-              <!-- 檔案輸入支援多張圖片與手機相機。 -->
-              <input id="photo-input" type="file" accept="image/*" capture="environment" multiple />
-              <!-- 顯示已選照片數量。 -->
-              <span id="photo-count" class="photo-count">目前 0 張</span>
+          <details class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>拍照與照片整理</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">手機可直接拍照，桌機可上傳照片；照片預設只保留在目前裝置，免費同步版不會上傳照片。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">照片留存</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 拍照控制區。 -->
+              <div class="photo-actions">
+                <!-- 開啟裝置相機。 -->
+                <button id="start-camera" class="button button--ghost" type="button">開啟相機</button>
+                <!-- 拍攝目前畫面。 -->
+                <button id="capture-photo" class="button button--ghost" type="button">拍攝畫面</button>
+                <!-- 關閉相機串流。 -->
+                <button id="stop-camera" class="button button--ghost" type="button">關閉相機</button>
+                <!-- 使用 label 包住 input 讓按鈕比較好看。 -->
+                <label class="button button--primary" for="photo-input">新增照片</label>
+                <!-- 檔案輸入支援多張圖片與手機相機。 -->
+                <input id="photo-input" type="file" accept="image/*" capture="environment" multiple />
+                <!-- 顯示已選照片數量。 -->
+                <span id="photo-count" class="photo-count">目前 0 張</span>
+              </div>
+              <!-- 相機預覽區塊。 -->
+              <div class="camera-box">
+                <!-- 顯示相機畫面預覽。 -->
+                <video id="camera-preview" autoplay playsinline muted></video>
+                <!-- 顯示相機狀態文字。 -->
+                <p id="camera-status" class="camera-status">目前尚未開啟相機，可直接拍照或改用上傳照片。</p>
+                <!-- 畫布用來把相機畫面轉成圖片。 -->
+                <canvas id="capture-canvas"></canvas>
+              </div>
+              <!-- 照片預覽容器。 -->
+              <div id="photo-preview" class="photo-grid"></div>
             </div>
-            <!-- 相機預覽區塊。 -->
-            <div class="camera-box">
-              <!-- 顯示相機畫面預覽。 -->
-              <video id="camera-preview" autoplay playsinline muted></video>
-              <!-- 顯示相機狀態文字。 -->
-              <p id="camera-status" class="camera-status">目前尚未開啟相機，可直接拍照或改用上傳照片。</p>
-              <!-- 畫布用來把相機畫面轉成圖片。 -->
-              <canvas id="capture-canvas"></canvas>
-            </div>
-            <!-- 照片預覽容器。 -->
-            <div id="photo-preview" class="photo-grid"></div>
-          </section>
+          </details>
 
           <!-- 免費優先同步區塊。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>同步設定</h3>
-            <!-- 說明這一版同步的範圍。 -->
-            <p class="section-note">
-              這一版會先同步文字草稿，方便 iPad 與桌機共用；照片仍保留在原本儲存的裝置，不會上傳雲端。
-            </p>
-            <!-- 同步設定外框。 -->
-            <div class="sync-box">
-              <!-- 顯示目前同步模式與狀態。 -->
-              <div class="sync-summary">
-                <!-- 顯示目前使用中的草稿模式。 -->
-                <p class="sync-mode-row">
-                  <!-- 顯示標題文字。 -->
-                  <span>目前模式</span>
-                  <!-- 顯示目前是本機或雲端草稿。 -->
-                  <strong id="sync-mode-badge" class="mode-badge">本機草稿</strong>
+          <details class="form-section form-card">
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>同步設定</h3>
+                <!-- 顯示區塊說明。 -->
+                <p class="section-note">免費優先同步版先同步文字草稿，方便 iPad 與桌機共用；照片仍保留在原本儲存的裝置。</p>
+              </div>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">免費同步</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 同步設定外框。 -->
+              <div class="sync-box">
+                <!-- 顯示目前同步模式與狀態。 -->
+                <div class="sync-summary">
+                  <!-- 顯示目前使用中的草稿模式。 -->
+                  <p class="sync-mode-row">
+                    <!-- 顯示標題文字。 -->
+                    <span>目前模式</span>
+                    <!-- 顯示目前是本機或雲端草稿。 -->
+                    <strong id="sync-mode-badge" class="mode-badge">本機草稿</strong>
+                  </p>
+                  <!-- 顯示同步狀態說明。 -->
+                  <p id="sync-status" class="sync-status">尚未設定雲端同步，目前草稿只會存放在這台裝置。</p>
+                </div>
+                <!-- Firebase 設定輸入區。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>Firebase 網頁設定</span>
+                  <!-- 讓使用者可直接貼上 Firebase 設定內容。 -->
+                  <textarea
+                    id="firebase-config"
+                    rows="6"
+                    placeholder="請把 Firebase Console 提供的 firebaseConfig 整段貼到這裡，例如：const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"
+                  ></textarea>
+                </label>
+                <!-- 同步設定按鈕列。 -->
+                <div class="sync-actions">
+                  <!-- 儲存 Firebase 設定。 -->
+                  <button id="save-sync-config" type="button" class="button button--primary">儲存同步設定</button>
+                  <!-- 清除 Firebase 設定。 -->
+                  <button id="clear-sync-config" type="button" class="button button--ghost">清除同步設定</button>
+                </div>
+                <!-- 顯示簡短操作提醒。 -->
+                <p class="sync-help">
+                  第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore，再把設定貼進來。
                 </p>
-                <!-- 顯示同步狀態說明。 -->
-                <p id="sync-status" class="sync-status">尚未設定雲端同步，目前草稿只會存放在這台裝置。</p>
-              </div>
-              <!-- Firebase 設定輸入區。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>Firebase 網頁設定</span>
-                <!-- 讓使用者可直接貼上 Firebase 設定內容。 -->
-                <textarea
-                  id="firebase-config"
-                  rows="6"
-                  placeholder="請把 Firebase Console 提供的 firebaseConfig 整段貼到這裡，例如：const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"
-                ></textarea>
-              </label>
-              <!-- 同步設定按鈕列。 -->
-              <div class="sync-actions">
-                <!-- 儲存 Firebase 設定。 -->
-                <button id="save-sync-config" type="button" class="button button--primary">儲存同步設定</button>
-                <!-- 清除 Firebase 設定。 -->
-                <button id="clear-sync-config" type="button" class="button button--ghost">清除同步設定</button>
-              </div>
-              <!-- 顯示簡短操作提醒。 -->
-              <p class="sync-help">
-                第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore，再把設定貼進來。
-              </p>
-              <!-- 帳號登入欄位區塊。 -->
-              <div class="field-grid">
-                <!-- Email 欄位。 -->
-                <label class="field">
-                  <!-- 顯示欄位名稱。 -->
-                  <span>Email</span>
-                  <!-- 讓使用者輸入登入 Email。 -->
-                  <input id="sync-email" type="email" placeholder="例如：you@example.com" autocomplete="username" />
-                </label>
-                <!-- 密碼欄位。 -->
-                <label class="field">
-                  <!-- 顯示欄位名稱。 -->
-                  <span>密碼</span>
-                  <!-- 讓使用者輸入登入密碼。 -->
-                  <input id="sync-password" type="password" placeholder="至少 6 碼" autocomplete="current-password" />
-                </label>
-              </div>
-              <!-- 帳號操作按鈕列。 -->
-              <div class="sync-actions">
-                <!-- 建立同步帳號。 -->
-                <button id="register-sync-account" type="button" class="button button--ghost">註冊帳號</button>
-                <!-- 登入同步帳號。 -->
-                <button id="login-sync-account" type="button" class="button button--primary">登入同步</button>
-                <!-- 登出同步帳號。 -->
-                <button id="logout-sync-account" type="button" class="button button--ghost">登出同步</button>
+                <!-- 帳號登入欄位區塊。 -->
+                <div class="field-grid field-grid--desktop-2">
+                  <!-- Email 欄位。 -->
+                  <label class="field">
+                    <!-- 顯示欄位名稱。 -->
+                    <span>Email</span>
+                    <!-- 讓使用者輸入登入 Email。 -->
+                    <input id="sync-email" type="email" placeholder="例如：you@example.com" autocomplete="username" />
+                  </label>
+                  <!-- 密碼欄位。 -->
+                  <label class="field">
+                    <!-- 顯示欄位名稱。 -->
+                    <span>密碼</span>
+                    <!-- 讓使用者輸入登入密碼。 -->
+                    <input id="sync-password" type="password" placeholder="至少 6 碼" autocomplete="current-password" />
+                  </label>
+                </div>
+                <!-- 帳號操作按鈕列。 -->
+                <div class="sync-actions">
+                  <!-- 建立同步帳號。 -->
+                  <button id="register-sync-account" type="button" class="button button--ghost">註冊帳號</button>
+                  <!-- 登入同步帳號。 -->
+                  <button id="login-sync-account" type="button" class="button button--primary">登入同步</button>
+                  <!-- 登出同步帳號。 -->
+                  <button id="logout-sync-account" type="button" class="button button--ghost">登出同步</button>
+                </div>
               </div>
             </div>
-          </section>
+          </details>
 
           <!-- 草稿儲存區塊。 -->
-          <section class="form-section">
-            <!-- 顯示區塊標題。 -->
-            <h3>草稿儲存</h3>
-            <!-- 說明目前草稿儲存位置。 -->
-            <p id="draft-section-note" class="section-note">家訪完可先存到目前這台裝置的瀏覽器資料庫，之後再回來載入整理。</p>
-            <!-- 草稿操作區。 -->
-            <div class="draft-box">
-              <!-- 草稿操作按鈕列。 -->
-              <div class="draft-actions">
-                <!-- 儲存新草稿。 -->
-                <button id="save-draft" type="button" class="button button--primary">儲存草稿</button>
-                <!-- 載入選取草稿。 -->
-                <button id="load-draft" type="button" class="button button--ghost">載入草稿</button>
-                <!-- 刪除選取草稿。 -->
-                <button id="delete-draft" type="button" class="button button--ghost">刪除草稿</button>
+          <details class="form-section form-card" open>
+            <!-- 可展開標題列。 -->
+            <summary class="form-card__summary">
+              <!-- 標題文字區。 -->
+              <div>
+                <!-- 顯示區塊標題。 -->
+                <h3>草稿儲存</h3>
+                <!-- 說明目前草稿儲存位置。 -->
+                <p id="draft-section-note" class="section-note">家訪完可先存到目前這台裝置或同步帳號，再回來載入整理。</p>
               </div>
-              <!-- 草稿選擇清單。 -->
-              <label class="field">
-                <!-- 顯示欄位名稱。 -->
-                <span>已存草稿</span>
-                <!-- 顯示目前已儲存的草稿。 -->
-                <select id="draft-select">
-                  <!-- 預設提示。 -->
-                  <option value="">目前尚無草稿</option>
-                </select>
-              </label>
-              <!-- 顯示草稿狀態文字。 -->
-              <p id="draft-status" class="draft-status">草稿會存放在目前這台裝置的瀏覽器中，不會自動上傳。</p>
+              <!-- 顯示狀態標籤。 -->
+              <span class="form-card__tag">先存再改</span>
+            </summary>
+
+            <!-- 區塊內容。 -->
+            <div class="form-card__body">
+              <!-- 草稿操作區。 -->
+              <div class="draft-box">
+                <!-- 草稿操作按鈕列。 -->
+                <div class="draft-actions">
+                  <!-- 儲存新草稿。 -->
+                  <button id="save-draft" type="button" class="button button--primary">儲存草稿</button>
+                  <!-- 載入選取草稿。 -->
+                  <button id="load-draft" type="button" class="button button--ghost">載入草稿</button>
+                  <!-- 刪除選取草稿。 -->
+                  <button id="delete-draft" type="button" class="button button--ghost">刪除草稿</button>
+                </div>
+                <!-- 草稿選擇清單。 -->
+                <label class="field">
+                  <!-- 顯示欄位名稱。 -->
+                  <span>已存草稿</span>
+                  <!-- 顯示目前已儲存的草稿。 -->
+                  <select id="draft-select">
+                    <!-- 預設提示。 -->
+                    <option value="">目前尚無草稿</option>
+                  </select>
+                </label>
+                <!-- 顯示草稿狀態文字。 -->
+                <p id="draft-status" class="draft-status">草稿會存放在目前這台裝置或你的同步帳號中，不會自動送出。</p>
+              </div>
             </div>
-          </section>
+          </details>
 
           <!-- 操作按鈕列。 -->
-          <div class="form-actions">
+          <div class="form-actions form-actions--footer">
             <!-- 送出表單並產生整理結果。 -->
             <button type="submit" class="button button--primary">產生整理內容</button>
             <!-- 重設表單讓使用者快速重新開始。 -->
@@ -444,7 +1206,7 @@
           <!-- 顯示輸出區名稱。 -->
           <h2>整理結果</h2>
           <!-- 說明輸出用途。 -->
-          <p>按下產生後，家訪紀錄會改用接近你提供範例的敘事格式，另外保留功能描述、問題清單與建議方向。</p>
+          <p>按下產生後，家訪紀錄會依 7 區塊重整後的內容輸出成較正式、可直接貼系統的整理文字，另外保留功能描述、問題清單與建議方向。</p>
         </div>
 
         <!-- 輸出卡片群組。 -->
@@ -459,7 +1221,7 @@
               <button class="button button--small" data-copy-target="visit-record-output" type="button">複製</button>
             </div>
             <!-- 顯示產出的文字結果。 -->
-            <textarea id="visit-record-output" rows="9" readonly placeholder="這裡會顯示接近家訪範例風格的完整敘事紀錄。"></textarea>
+            <textarea id="visit-record-output" rows="12" readonly placeholder="這裡會顯示依新架構整理後的家訪紀錄。"></textarea>
           </article>
 
           <!-- 功能描述輸出卡片。 -->
@@ -472,7 +1234,7 @@
               <button class="button button--small" data-copy-target="function-output" type="button">複製</button>
             </div>
             <!-- 顯示產出的文字結果。 -->
-            <textarea id="function-output" rows="7" readonly placeholder="這裡會顯示 ADL/IADL 整合後的功能描述。"></textarea>
+            <textarea id="function-output" rows="10" readonly placeholder="這裡會顯示 ADL / IADL 整合後的功能描述。"></textarea>
           </article>
 
           <!-- 問題清單輸出卡片。 -->
@@ -485,7 +1247,7 @@
               <button class="button button--small" data-copy-target="problem-output" type="button">複製</button>
             </div>
             <!-- 顯示產出的文字結果。 -->
-            <textarea id="problem-output" rows="6" readonly placeholder="這裡會顯示依觀察與功能推論的問題清單。"></textarea>
+            <textarea id="problem-output" rows="9" readonly placeholder="這裡會顯示勾選與系統推論後的問題清單。"></textarea>
           </article>
 
           <!-- 建議方向輸出卡片。 -->
@@ -498,7 +1260,7 @@
               <button class="button button--small" data-copy-target="suggestion-output" type="button">複製</button>
             </div>
             <!-- 顯示產出的文字結果。 -->
-            <textarea id="suggestion-output" rows="6" readonly placeholder="這裡會顯示較保守語氣的建議方向。"></textarea>
+            <textarea id="suggestion-output" rows="8" readonly placeholder="這裡會顯示保守語氣的建議方向。"></textarea>
           </article>
 
           <!-- 固定提醒區塊。 -->
