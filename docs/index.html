@@ -1088,10 +1088,28 @@
                     <!-- 顯示標題文字。 -->
                     <span>目前模式</span>
                     <!-- 顯示目前是本機或雲端草稿。 -->
-                    <strong id="sync-mode-badge" class="mode-badge">本機草稿</strong>
+                    <strong id="sync-mode-badge" class="mode-badge">本機模式</strong>
                   </p>
                   <!-- 顯示同步狀態說明。 -->
                   <p id="sync-status" class="sync-status">尚未設定雲端同步，目前草稿只會存放在這台裝置。</p>
+                  <!-- 顯示使用者現在該做的下一步。 -->
+                  <p id="sync-next-step" class="sync-next-step">下一步：請先貼上整段 firebaseConfig，再按下「儲存同步設定」。</p>
+                </div>
+                <!-- 顯示同步設定流程，讓使用者知道目前做到哪一步。 -->
+                <div class="sync-steps">
+                  <!-- 顯示步驟區標題。 -->
+                  <p class="sync-steps__title">設定步驟</p>
+                  <!-- 使用有順序的清單呈現四個步驟。 -->
+                  <ol class="sync-step-list">
+                    <!-- 第一步：貼上 Firebase 設定。 -->
+                    <li id="sync-step-config" class="sync-step is-current">1. 貼上 Firebase 設定</li>
+                    <!-- 第二步：儲存同步設定。 -->
+                    <li id="sync-step-save" class="sync-step">2. 按下儲存同步設定</li>
+                    <!-- 第三步：註冊或登入個人帳號。 -->
+                    <li id="sync-step-auth" class="sync-step">3. 使用自己的 Email 註冊或登入</li>
+                    <!-- 第四步：開始把新草稿存進個人雲端。 -->
+                    <li id="sync-step-cloud" class="sync-step">4. 之後新草稿才會進入個人雲端</li>
+                  </ol>
                 </div>
                 <!-- Firebase 設定輸入區。 -->
                 <label class="field">
@@ -1113,7 +1131,7 @@
                 </div>
                 <!-- 顯示簡短操作提醒。 -->
                 <p class="sync-help">
-                  第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore，再把設定貼進來。
+                  第一次設定時，請先到 Firebase 開啟 Email/Password 登入與 Firestore，再把設定貼進來。這一版只會同步文字資料，照片仍留在原本拍攝的裝置。
                 </p>
                 <!-- 帳號登入欄位區塊。 -->
                 <div class="field-grid field-grid--desktop-2">
